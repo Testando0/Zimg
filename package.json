@@ -1,6 +1,6 @@
 {
   "name": "z-image-turbo-vercel",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "15.1.6",
+    "next": "15.2.0-canary.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "@huggingface/inference": "^2.8.1",
@@ -25,5 +25,8 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "autoprefixer": "^10.4.20"
+  },
+  "overrides": {
+    "next": "15.2.0-canary.0"
   }
 }
