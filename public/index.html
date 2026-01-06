@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Z-Image Turbo - Permanente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white flex flex-col items-center justify-center min-h-screen p-4">
+    <div class="max-w-xl w-full space-y-4">
+        <h1 class="text-3xl font-bold text-center">Z-Image Turbo</h1>
+        <input id="prompt" type="text" placeholder="Digite seu prompt..." class="w-full p-4 rounded bg-zinc-900 border border-zinc-800 focus:outline-none">
+        <button onclick="generate()" id="btn" class="w-full bg-white text-black font-bold p-4 rounded hover:bg-zinc-200">GERAR IMAGEM</button>
+        <div id="result" class="mt-4 aspect-square bg-zinc-900 rounded flex items-center justify-center overflow-hidden">
+            <p class="text-zinc-500">Aguardando...</p>
+        </div>
+    </div>
+
+    <script>
+        async function generate() {
+            const prompt = document.getElementById('prompt').value;
+            const btn = document.getElementById('btn');
+            const result = document.getElementById('result');
+            
+            btn.disabled = true;
+            btn.innerText = "GERANDO...";
+            
+            try {
+                const res = await fetch('/api/generate', {
+                    method: 'POST',
+                    body: JSON.stringify({ prompt })
+                });
+                const blob = await res.blob();
+                result.innerHTML = `<img src="${URL.createObjectURL(blob)}" class="w-full h-full object-cover">`;
+            } catch (e) {
+                alert("Erro ao gerar");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "GERAR IMAGEM";
+            }
+        }
+    </script>
+</body>
+</html>
